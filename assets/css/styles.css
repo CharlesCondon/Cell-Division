@@ -68,10 +68,13 @@ canvas {
 }
 
 @media only screen and (max-width: 600px) {
-    /* .pageContainer {
-        flex-direction: row;
-    } */
-    .optionsContainer {
-        flex-direction: column;
+    #optionsContainer {
+        gap: 40px;
+    }
+    .sliders {
+        justify-content: flex-end;
+    }
+    #buttons {
+        gap: 40px;
     }
 }
