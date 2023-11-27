@@ -3,14 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulation</title>
+    <title>Cell Division</title>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.js"></script>
     <script src="assets/js/main.js"></script>
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" href="./favicon.ico">
 </head>
-<body>
-    <div id="visuals"></div>
+<body> 
+    <div class="pageContainer">
+        <div class="optionsContainer">
+            <div id="buttons">
+                <div id="startBtn"></div>
+                <div id="optionBtns"></div>
+            </div>
+            <div class="sliders">
+                <div id="limitOption">
+                    <h3>Ball Limit</h3>
+                </div>
+                <div id="fadeOption">
+                    <h3>Ball Fade</h3>
+                </div>
+                <div id="sizeOption">
+                    <h3>Size</h3>
+                </div>
+                <div id="xOption">
+                    <h3>Horizontal Speed</h3>
+                </div>
+                <div id="yOption">
+                    <h3>Vertical Speed</h3>
+                </div>
+                
+            </div>
+        </div>
+        <div id="visuals"></div>
+    </div>
 </body>
 </html>

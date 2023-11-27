@@ -1,27 +1,13 @@
 let start = false;
-// let sizeSlider;
-// let gravSlider;
-// let speedSlider;
-
-// // let dia = 75;   // size of the ball
-
-// let bounciness = 0.8;  // see note above
-
-// let position;          // position and forces can
-// let gravity;           // be listed as PVectors
-// let speed;   
-
-// let dupes = 1;
-
-// let balls = [];
+let seizureMode = false;
+let outlineMode = false;
+let seizureButton;
+let startButton;
+let outlineButton;
 
 function startDraw() {
     if (!start) {
         start = true;
-        // position.x = 75;
-        // position.y = 75;
-        // gravity = createVector(0, gravSlider.value());
-        // speed = createVector(speedSlider.value(), 0);
         loop()
     }
     else {
@@ -29,6 +15,23 @@ function startDraw() {
         noLoop()
     }
     
+}
+
+function seizureToggle() {
+    if (seizureButton.checked()) {
+        seizureMode = true;
+    }
+    else {
+        seizureMode = false;
+    }
+}
+function outlineToggle() {
+    if (outlineButton.checked()) {
+        outlineMode = true;
+    }
+    else {
+        outlineMode = false;
+    }
 }
 
 // let x = window.innerWidth/2;
@@ -41,27 +44,35 @@ let r = 25;
 let balls = [];
 
 function setup() {
-    const initCanvas = createCanvas(windowWidth-100, windowHeight-100);
+    const initCanvas = createCanvas(windowWidth-(windowWidth*.1), windowHeight-(windowHeight*.1));
     initCanvas.parent("visuals");
 
 
-    let startButton = createButton('Start');
-    startButton.position(20,20);
+    startButton = createButton('Start');
+    startButton.parent("startBtn");
     startButton.mousePressed(startDraw)
 
-    sizeSlider = createSlider(1, 75, 25);
-    sizeSlider.position(160, 20);
+    seizureButton = createCheckbox('Seizure Mode', false);
+    seizureButton.parent("optionBtns");
+    seizureButton.changed(seizureToggle);
 
-    xspeedSlider = createSlider(0, 2, 1, .1);
-    xspeedSlider.position(300, 20);
-    yspeedSlider = createSlider(0, 2, 1, .1);
-    yspeedSlider.position(440, 20);
+    outlineButton = createCheckbox('Ball Outline', false);
+    outlineButton.parent("optionBtns");
+    outlineButton.changed(outlineToggle);
+
+    sizeSlider = createSlider(1, 75, 25);
+    sizeSlider.parent("sizeOption");
+
+    xspeedSlider = createSlider(-2, 2, 1, .1);
+    xspeedSlider.parent("xOption");
+    yspeedSlider = createSlider(-2, 2, 1, .1);
+    yspeedSlider.parent("yOption");
 
     limitSlider = createSlider(1, 2000, 100, 1);
-    limitSlider.position(580, 20);
+    limitSlider.parent("limitOption");
     
     fadeSlider = createSlider(1, 255, 50, 1);
-    fadeSlider.position(720, 20);
+    fadeSlider.parent("fadeOption");
     
     let ball = {
         x: window.innerWidth/2 - 50,
@@ -76,10 +87,22 @@ function setup() {
 
 function draw() {
     background(0, 0, 0, fadeSlider.value());
+    let red = Math.floor(Math.random()*255)
+    let green = Math.floor(Math.random()*255)
+    let blue = Math.floor(Math.random()*255)
 
     if (start) {
         for (let i = 0; i < balls.length; i++) {
-            
+            if (seizureMode) {
+                fill(red, green, blue);
+            }
+            if (outlineMode) {
+                stroke(0,0,0);
+            }
+            else {
+                noStroke();
+            }
+
             ellipse(balls[i].x, balls[i].y, sizeSlider.value(), sizeSlider.value());
             balls[i].x += (balls[i].xSpeed * xspeedSlider.value());
             balls[i].y += (balls[i].ySpeed * yspeedSlider.value());
@@ -114,8 +137,6 @@ function draw() {
         
     }
     else {
-        fill(255);
-        noStroke();
         ellipse(balls[0].x, balls[0].y, sizeSlider.value(), sizeSlider.value());
     }
 }
