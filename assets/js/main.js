@@ -5,6 +5,14 @@ let seizureButton;
 let startButton;
 let outlineButton;
 
+addEventListener("DOMContentLoaded", (event) => {
+    let showBtn = document.getElementById("showBtn");
+    let optionContainer = document.getElementById("optionsContainer");
+    showBtn.addEventListener("click", () => {
+        optionContainer.classList.toggle("hidden");
+    })  
+});
+
 function startDraw() {
     if (!start) {
         start = true;
@@ -43,8 +51,13 @@ let r = 25;
 
 let balls = [];
 
+
 function setup() {
-    const initCanvas = createCanvas(windowWidth-(windowWidth*.1), windowHeight-(windowHeight*.1));
+    const canvasContainer = document.getElementById("visuals");
+    const w = canvasContainer.offsetWidth;
+    const h = canvasContainer.offsetHeight;
+    
+    const initCanvas = createCanvas(w, h);
     initCanvas.parent("visuals");
 
 
