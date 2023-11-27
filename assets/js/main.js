@@ -56,7 +56,7 @@ function setup() {
     const canvasContainer = document.getElementById("visuals");
     const w = canvasContainer.offsetWidth;
     const h = canvasContainer.offsetHeight;
-    
+
     const initCanvas = createCanvas(w, h);
     initCanvas.parent("visuals");
 
@@ -88,8 +88,8 @@ function setup() {
     fadeSlider.parent("fadeOption");
     
     let ball = {
-        x: window.innerWidth/2 - 50,
-        y: window.innerHeight/2 - 50,
+        x: w/2,
+        y: h/2,
         dia: sizeSlider.value(),
         xSpeed: Math.floor(Math.random()*20),
         ySpeed: Math.floor(Math.random()*20)
