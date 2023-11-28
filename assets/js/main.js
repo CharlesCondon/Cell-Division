@@ -15,12 +15,16 @@ addEventListener("DOMContentLoaded", (event) => {
 });
 
 function startDraw() {
+    let btn = document.getElementById("startBtn").firstChild;
+    console.log(btn)
     if (!start) {
         start = true;
+        btn.innerText = "Pause"
         loop()
     }
     else {
         start = false
+        btn.innerText = "Play"
         noLoop()
     }
     
@@ -43,16 +47,12 @@ function outlineToggle() {
     }
 }
 
-// let x = window.innerWidth/2;
-// let y = window.innerHeight/2;
 let xspeed = 5;
 let yspeed = 2;
 
 let r = 25;
 
 let balls = [];
-
-
 
 function setup() {
     const canvasContainer = document.getElementById("visuals");
@@ -63,7 +63,7 @@ function setup() {
     initCanvas.parent("visuals");
 
 
-    startButton = createButton('Start');
+    startButton = createButton('Play');
     startButton.parent("startBtn");
     startButton.mousePressed(startDraw)
 
@@ -109,7 +109,12 @@ function setup() {
             ySpeed: Math.floor(Math.random()*20)
         }
         balls.push(ball);
-        start = false;
+
+        if (start) {
+            let btn = document.getElementById("startBtn").firstChild;
+            btn.innerText = "Play"
+            start = false;
+        }
     }
     
 
@@ -166,8 +171,6 @@ function draw() {
                 balls[i].ySpeed = (balls[i].ySpeed)*-1;
             }
         }
-        
-        
     }
     else {
         ellipse(balls[0].x, balls[0].y, sizeSlider.value(), sizeSlider.value());
