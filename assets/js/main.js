@@ -3,6 +3,7 @@ let seizureMode = false;
 let outlineMode = false;
 let seizureButton;
 let startButton;
+let restartButton;
 let outlineButton;
 
 addEventListener("DOMContentLoaded", (event) => {
@@ -52,6 +53,7 @@ let r = 25;
 let balls = [];
 
 
+
 function setup() {
     const canvasContainer = document.getElementById("visuals");
     const w = canvasContainer.offsetWidth;
@@ -96,6 +98,24 @@ function setup() {
     }
     
     balls.push(ball);
+
+    function restartDraw() {
+        balls = [];
+        let ball = {
+            x: w/2,
+            y: h/2,
+            dia: sizeSlider.value(),
+            xSpeed: Math.floor(Math.random()*20),
+            ySpeed: Math.floor(Math.random()*20)
+        }
+        balls.push(ball);
+        start = false;
+    }
+    
+
+    restartButton = createButton('Restart');
+    restartButton.parent("startBtn");
+    restartButton.mousePressed(restartDraw)
 }
 
 function draw() {
